@@ -38,5 +38,3 @@ function updateUserInfo(user) {
   // document.getElementById("userInfoStreet").innerText =
   //   user.address?.street || "";
 }
-
-const var = 1;
