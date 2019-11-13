@@ -25,7 +25,7 @@ var userStore = function () {
   var changeListeners = [];
 
   function emitUserUpdate() {
-    console.log("Emit updates");
+    console.log('Emit updates');
     changeListeners.map(function (cb) {
       return cb(currentUser);
     });
@@ -49,10 +49,10 @@ var initUserForm = function initUserForm() {
   var template = "\n<h2>User form</h2>\n<div class=\"userForm-item\">\n    <label class=\"userForm-label\" for=\"name\">Name:</label>\n    <input type=\"text\" id=\"name\"/>\n</div>\n<div class=\"userForm-item\">\n    <label class=\"userForm-label\" for=\"age\">Age:</label>\n    <input type=\"text\" id=\"age\"/>\n</div>\n<h5>Address</h5>\n<div class=\"userForm-item\">\n    <label class=\"userForm-label\" for=\"city\">City:</label>\n    <input type=\"text\" id=\"city\"/>\n</div>\n<div class=\"userForm-item\">\n    <label class=\"userForm-label\" for=\"street\">Street:</label>\n    <input type=\"text\" id=\"street\"\n    />\n</div>\n<button id=\"saveButton\">Save</button>\n";
 
   function getFormData() {
-    var name = document.getElementById("name").value;
-    var age = document.getElementById("age").value;
-    var city = document.getElementById("city").value;
-    var street = document.getElementById("street").value;
+    var name = document.getElementById('name').value;
+    var age = document.getElementById('age').value;
+    var city = document.getElementById('city').value;
+    var street = document.getElementById('street').value;
     var user = {
       name: name,
       age: age
@@ -70,12 +70,12 @@ var initUserForm = function initUserForm() {
   }
 
   return function initUserForm(parent) {
-    console.log("UserForm: init");
-    var host = document.createElement("div");
+    console.log('UserForm: init');
+    var host = document.createElement('div');
     host.innerHTML = template;
     parent.append(host);
-    host.querySelector("#saveButton").addEventListener("click", function (event) {
-      console.log("UserForm: save button click");
+    host.querySelector('#saveButton').addEventListener('click', function (event) {
+      console.log('UserForm: save button click');
       event.preventDefault();
       userStore.setUser(getFormData());
     });
@@ -86,30 +86,27 @@ var initUserInfo = function () {
   var template = "\n   <h2>User info</h2>\n    <div class=\"userInfo-row\">\n        <div class=\"userInfo-label\">Name:</div>\n        <div class=\"userInfo-value\" id=\"userInfoName\"></div>\n    </div> \n    <div  class=\"userInfo-row\">\n        <div class=\"userInfo-label\">Age:</div>\n        <div class=\"userInfo-value\" id=\"userInfoAge\"></div>\n    </div> \n    <div  class=\"userInfo-row\">\n        <div class=\"userInfo-label\">City:</div>\n        <div class=\"userInfo-value\" id=\"userInfoCity\"></div>\n    </div> \n    <div  class=\"userInfo-row\">\n        <div class=\"userInfo-label\">Street:</div>\n        <div class=\"userInfo-value\" id=\"userInfoStreet\"></div>\n    </div> \n";
 
   function updateUserInfo(user) {
-    var _user$address;
-
-    console.log("User info: update");
-    document.getElementById("userInfoName").innerText = user.name;
-    document.getElementById("userInfoAge").innerText = user.age;
-    document.getElementById("userInfoCity").innerText = user.address && user.address.city || ""; // document.getElementById('userInfoStreet').innerText = user.address && user.address.street || '';
-
-    document.getElementById("userInfoStreet").innerText = ((_user$address = user.address) === null || _user$address === void 0 ? void 0 : _user$address.street) || "";
+    console.log('User info: update');
+    document.getElementById('userInfoName').innerText = user.name;
+    document.getElementById('userInfoAge').innerText = user.age;
+    document.getElementById('userInfoCity').innerText = user.address && user.address.city || '';
+    document.getElementById('userInfoStreet').innerText = user.address && user.address.street || ''; // document.getElementById('userInfoStreet').innerText = user.address?.street || '';
   }
 
   return function initUserInfo(parent) {
-    console.log("User info: init");
+    console.log('User info: init');
     userStore.addChangeListener(updateUserInfo);
-    var host = document.createElement("div");
+    var host = document.createElement('div');
     host.innerHTML = template;
     parent.append(host);
   };
 }();
 
 var initApp = function initApp() {
-  document.addEventListener("DOMContentLoaded", function () {
-    console.log("Init application");
-    initUserForm(document.getElementById("userForm"));
-    initUserInfo(document.getElementById("userInfo"));
+  document.addEventListener('DOMContentLoaded', function () {
+    console.log('Init application');
+    initUserForm(document.getElementById('userForm'));
+    initUserInfo(document.getElementById('userInfo'));
   });
 };
 
